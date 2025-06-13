@@ -1,0 +1,22 @@
+FROM nvidia/cuda:12.2.0-runtime-ubuntu22.04
+
+ENV DEBIAN_FRONTEND=noninteractive
+
+# Install Python and tools
+RUN apt update && \
+    apt install -y python3 python3-pip git ffmpeg && \
+    apt clean && rm -rf /var/lib/apt/lists/*
+
+# Install OCR dependencies
+RUN pip install python-doctr[torch] \
+    torchvision torchaudio \
+    'opencv-python-headless<5.0.0' \
+    -f https://download.pytorch.org/whl/cu118/torch_stable.html
+
+# Preload the DocTR models so they don’t download at runtime
+RUN python3 -c "from doctr.models import ocr_predictor; ocr_predictor(pretrained=True)"
+
+# Set up the OCR batch script
+COPY run_doctr_batch.py /workspace/run_doctr.py
+WORKDIR /workspace
+CMD ["python3", "run_doctr.py"]
