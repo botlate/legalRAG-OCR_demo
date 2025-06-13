@@ -2,7 +2,7 @@
 ## OCR Pipeline for Legal Document Processing
 
 ### Overview
-Working OCR module for a demonstration RAG (Retrieval-Augmented Generation) pipeline for querying small sets of legal pleadings with high precision/low hallucinations. This module converts scanned court documents into machine-readable text using smart layout recognition and GPU-accelerated OCR.
+Working OCR module using open source resources for a demonstration RAG (Retrieval-Augmented Generation) pipeline for querying small sets of legal pleadings with high precision/low hallucinations. This module converts scanned court documents into machine-readable text using smart layout recognition and GPU-accelerated OCR.
 
 ### Technical Implementation
 - DocTR deep learning OCR engine
